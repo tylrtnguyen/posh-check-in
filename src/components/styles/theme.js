@@ -1,3 +1,5 @@
+import { css } from 'styled-components';
+
 const theme = {
     colors: {
         black: '#000000',
@@ -11,7 +13,8 @@ const theme = {
         hover: '#73909C',
         error: '#FE0000',
         placeholder: '#ADADAD',
-        borderBottom: '#D9D9D9'
+        borderBottom: '#D9D9D9',
+        success: '#7DD196'
     },
 
     fonts: {
@@ -34,7 +37,11 @@ const theme = {
         copyright: '0.7rem'
     },
 
-
+    flexCenter: css`
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `,
 
     borderRadius: '10px',
     navHeight: '100px'

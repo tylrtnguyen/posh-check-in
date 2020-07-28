@@ -1,6 +1,6 @@
 const services = [
     {
-        value: "None",
+        value: "",
         text: "Choose Services"
     },
     {
@@ -26,6 +26,26 @@ const services = [
     {
         value: "Refill",
         text: "Refill"
+    },
+    {
+        value: "Fullset",
+        text: "Fullset"
+    },
+    {
+        value: "Pedicure and Manicure",
+        text: "Pedicure and Manicure"
+    },
+    {
+        value: "Pedicure and Gel Manicure",
+        text: "Pedicure and Gel Manicure"
+    },
+    {
+        value: "Pedicure and Dip",
+        text: "Pedicure and Dip"
+    },
+    {
+        value: "Pedicure and Fullset",
+        text: "Pedicure and Fullset"
     }
 ];
 
