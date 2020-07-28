@@ -1,14 +1,11 @@
 import styled from 'styled-components';
 import { theme, media } from '../styles';
-import { Link } from 'react-router-dom';
-const { colors, fonts, typeScale, fontWeight, borderRadius } = theme;
+const { colors, fonts, typeScale, fontWeight, borderRadius, flexCenter } = theme;
 
 export const StyledContainer = styled.div`
     width: 100%;  
-    display: flex;
+    ${flexCenter};
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
     ${media.tablet`padding: 50px 0 50px 0;`};
     ${media.thone`padding: 0`};
 
@@ -26,9 +23,6 @@ export const StyledWrapper = styled.div`
     ${media.phablet`width: 400px;`};
 `
 
-export const StyledForm = styled.form`
-    width: 100%;
-`
 
 export const StyledIntro = styled.span`
     display: block;
@@ -146,6 +140,7 @@ export const StyledButton = styled.button`
     justify-content: center;
     align-items: center;
     padding: 0 20px;
+    cursor: pointer;
     width: 100%;
     margin: 0;
     text-decoration: none;
