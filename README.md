@@ -2,12 +2,12 @@
     <a href="https://posh-nail-spa.now.sh/" target="_blank" rel="noreferrer noopener"><img width="120px" height="120px" src="./public/images/logo.png" alt="Posh Nail Logo"></a>
 </p>
 <h2 align="center">Posh Check In</h2>
-<a href="https://posh-check-in.vercel.app" target="_blank" rel="noreferrer noopener"><h3 align="center">DEMO</h3></a>
+<h3 align="center"><a href="https://posh-check-in.vercel.app" target="_blank" rel="noopener noreferrer">DEMO</a></h3>
 
 ### :information_source: Project Information
-1. Node version: 14.6.0
-2. Formik version: 2.1.4
-3. React version: 16.13.1
+- Node version: 14.6.0
+- Formik version: 2.1.4
+- React version: 16.13.1
 
 ### :wrench: Installation
 1. Install and use the correct version of Node
