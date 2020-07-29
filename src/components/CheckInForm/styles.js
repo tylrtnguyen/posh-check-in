@@ -70,9 +70,6 @@ export const StyledInput = styled.input`
     line-height: 1.2;
     padding: 0 5px;
     ${media.thone`margin-bottom: 0;`};
-
-    ${({error}) => error && `border-color: red;`
-    };
 `;
 
 export const StyledSelect = styled.select`

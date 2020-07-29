@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Formik, Form, FastField, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import Script from 'react-load-script';
 import axios from 'axios';
 import { formatPhoneNumber } from '../utils/formatPhoneNumber';
+import Autocomplete from 'react-google-autocomplete';
 import {
     StyledContainer,
     StyledWrapper,
@@ -20,6 +20,7 @@ import {
     StyledButton,
     StyledError
 } from './styles';
+import './styles.css';
 import { ReactComponent as NextIcon } from '../assets/icons/next.svg';
 import technicians from '../data/technicians';
 import services from '../data/services';
@@ -29,35 +30,14 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2
 
 const validationSchema = Yup.object({
     name: Yup.string().required('Name is required'),
-    address: Yup.string().required('Mailing address is required'),
+    address: Yup.string().min(8, 'Address is too short').required('Mailing address is required'),
     service: Yup.string().required('Service is required'),
     phone: Yup.string().required('Phone number is required').matches(phoneRegExp, 'Phone number is not valid')
 })
 
-let autoComplete;
 
 const CheckInForm = () => {
     const history = useHistory();
-    const [formatAddress, setFormatAddress] = useState('');
-    const [addressError, setAddressError] = useState('');
-
-    const handleScriptLoad = () => {
-        autoComplete = new window.google.maps.places.Autocomplete(
-            document.getElementById('address'),
-            { componentRestrictions: { country: "us"} }   
-        )
-        autoComplete.setFields(['address_components', 'formatted_address']);
-        // Fire an event when a suggest name is selected
-        autoComplete.addListener('place_changed', handlePlaceSelect);
-    }
-
-    const handlePlaceSelect = () => {
-        const addressObject = autoComplete.getPlace();
-        const formattedAddress = addressObject.formatted_address;
-        setFormatAddress(formattedAddress);
-    }
-
-
 
     const sendCustomer = async (name, address, service, technician, phone, setSubmitting, resetForm) => {
         try {
@@ -89,7 +69,7 @@ const CheckInForm = () => {
 
     return (
         <StyledContainer>
-            <Script url="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4H8NmmDbEXDLe92A7hip3o6Af0pMfLTQ&libraries=places" onLoad={handleScriptLoad} />
+            {/* <Script url="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4H8NmmDbEXDLe92A7hip3o6Af0pMfLTQ&libraries=places" onLoad={handleScriptLoad} /> */}
             <StyledWrapper>
                     <StyledIntro>Your wonderful treatment starts here!</StyledIntro>
                     <StyledPrivacy>We respect our customer’s privacy. Therefore, we guarantee that your information will not be shared with anyone. </StyledPrivacy>
@@ -103,13 +83,10 @@ const CheckInForm = () => {
                         }}
                         validationSchema={validationSchema}
                         onSubmit={(values, {setSubmitting, resetForm}) => {
+                            const { name, address, service, technician, phone } = values
                             console.log(values);
-                            const { name, service, technician, phone } = values
                             const formattedPhoneNumber = formatPhoneNumber(phone)
-                            if(formatAddress.length < 8) {
-                                setAddressError('Address is too short!')
-                            }
-                            sendCustomer(name, formatAddress, service, technician, formattedPhoneNumber, setSubmitting, resetForm);
+                            sendCustomer(name, address, service, technician, formattedPhoneNumber, setSubmitting, resetForm);    
                         }}
                     >
                     {({values, touched, errors, isSubmitting, setFieldValue, handleChange, handleBlur}) => (
@@ -131,18 +108,13 @@ const CheckInForm = () => {
                         {/* Address Field */}
                         <StyledFormGroup>
                             <StyledLabel>Mailing Address</StyledLabel>
-                            <StyledInput
-                                component="input"
-                                as={FastField}
-                                value={values.address}
-                                type="text" 
-                                name="address" 
-                                id="address"
-                                error={touched.address && errors.address ? 1 : 0}
-                                placeholder="Enter your mailing address" />
-                            <StyledFocusInput />
+                            <Autocomplete
+                                style={{width: '100%'}}
+                                onPlaceSelected={(place) => setFieldValue('address', place.formatted_address)}
+                                types={['geocode']}
+                                componentRestrictions={{country: "us"}}
+                            />
                             <ErrorMessage component={StyledError} name="address" />
-                            <StyledError>{addressError}</StyledError>
                         </StyledFormGroup>
                         {/* Phone Field */}
                         <StyledFormGroup>
