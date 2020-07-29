@@ -5,9 +5,9 @@
 <a href="https://posh-check-in.vercel.app" target="_blank" rel="noreferrer noopener"><h3 align="center">DEMO</h3></a>
 
 ### :information_source: Project Information
-1. Node version: 14.6.0
-2. Formik version: 2.1.4
-3. React version: 16.13.1
+- Node version: 14.6.0
+- Formik version: 2.1.4
+- React version: 16.13.1
 
 ### :wrench: Installation
 1. Install and use the correct version of Node
