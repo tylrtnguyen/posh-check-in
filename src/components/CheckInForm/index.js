@@ -4,7 +4,6 @@ import { Formik, Form, FastField, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { formatPhoneNumber } from '../utils/formatPhoneNumber';
-import Autocomplete from 'react-google-autocomplete';
 import {
     StyledContainer,
     StyledWrapper,
@@ -108,12 +107,16 @@ const CheckInForm = () => {
                         {/* Address Field */}
                         <StyledFormGroup>
                             <StyledLabel>Mailing Address</StyledLabel>
-                            <Autocomplete
-                                style={{width: '100%'}}
-                                onPlaceSelected={(place) => setFieldValue('address', place.formatted_address)}
-                                types={['geocode']}
-                                componentRestrictions={{country: "us"}}
-                            />
+                            <StyledInput
+                                component="input"
+                                as={FastField}
+                                type="text"
+                                name="address"
+                                id="address"
+                                error={touched.name && errors.name ? 1 : 0}
+                                placeholder="Enter your mailing address"
+                            >
+                            </StyledInput>
                             <ErrorMessage component={StyledError} name="address" />
                         </StyledFormGroup>
                         {/* Phone Field */}
