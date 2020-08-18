@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "author": "Thong Ba Nguyen",
   "github": "https://github.com/tylrtnguyen",
-  "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
